@@ -3,13 +3,20 @@ from __future__ import annotations
 import json
 import pathlib
 from urllib.request import Request, urlopen
+import sys
 
 import typer
+
+from .configs import CARBON
 
 app = typer.Typer()
 
 CARBON_ENDPOINT = "https://carbonara-42.herokuapp.com/api/cook"
 CARBON_CONFIG = (pathlib.Path(__file__) / "../carbon.config.json").resolve()
+
+
+def read_code_from_stdin():
+    return "".join([line for line in sys.stdin])
 
 
 def load_config(config_file_path: str | pathlib.Path) -> dict:
@@ -26,8 +33,10 @@ def carbon(code: str, language: str, out: str):
     if possible_code_file.exists() and possible_code_file.is_file():
         with open(possible_code_file, "r") as f:
             code = f.read()
+    elif code == "-":
+        code = read_code_from_stdin()
 
-    config = load_config(CARBON_CONFIG)
+    config = CARBON
     config["code"] = code
     config["language"] = language
 
