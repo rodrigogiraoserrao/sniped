@@ -211,6 +211,14 @@ jinja2 = "*"
 toml = ["tomli"]
 
 [[package]]
+name = "shellingham"
+version = "1.4.0"
+description = "Tool to Detect Surrounding Shell"
+category = "main"
+optional = false
+python-versions = "!=3.0,!=3.1,!=3.2,!=3.3,>=2.6"
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -228,6 +236,8 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 click = ">=7.1.1,<9.0.0"
+colorama = {version = ">=0.4.3,<0.5.0", optional = true, markers = "extra == \"all\""}
+shellingham = {version = ">=1.3.0,<2.0.0", optional = true, markers = "extra == \"all\""}
 
 [package.extras]
 all = ["colorama (>=0.4.3,<0.5.0)", "shellingham (>=1.3.0,<2.0.0)"]
@@ -254,7 +264,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "3ec97398128ae85264ec102adcbb8f72daf3739473b218d9f09186b82e0a0848"
+content-hash = "7ead309eca2f169fb7e8399bc6d566518a4e997d59439b08ceaed0a2e1ae492f"
 
 [metadata.files]
 atomicwrites = [
@@ -387,6 +397,10 @@ pytest = [
 scriv = [
     {file = "scriv-0.13.0-py2.py3-none-any.whl", hash = "sha256:06b65c76ba8d5f23f3eb7e914cafe2dbed7687371eadb9151b3b5c4020c33303"},
     {file = "scriv-0.13.0.tar.gz", hash = "sha256:a95cc31ce0036320099fe99bcd7560374951dab313a7a5308bb9c4db5eee5527"},
+]
+shellingham = [
+    {file = "shellingham-1.4.0-py2.py3-none-any.whl", hash = "sha256:536b67a0697f2e4af32ab176c00a50ac2899c5a05e0d8e2dadac8e58888283f9"},
+    {file = "shellingham-1.4.0.tar.gz", hash = "sha256:4855c2458d6904829bd34c299f11fdeed7cfefbf8a2c522e4caea6cd76b3171e"},
 ]
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
