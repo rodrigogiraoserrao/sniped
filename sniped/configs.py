@@ -25,3 +25,21 @@ CARBON = {
     "name": "",
     "width": 680,
 }
+
+
+SNAPPIFY = {
+    "fileName": "test.js",
+    "theme": "github-dark-dimmed",
+    "background": "linear-gradient(354deg,  #FF75B5, #FFB86C)",
+    "paddingLeft": 60,
+    "paddingRight": 60,
+    "paddingTop": 40,
+    "paddingBottom": 100,
+    "profileInfo": {
+        "showFullname": True,
+        "showUsername": True,
+        "showAvatar": True,
+        "position": "bottom-center",
+    },
+    "aspectRatio": {"width": 16, "height": 9},
+}
