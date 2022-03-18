@@ -11,6 +11,10 @@ typer = "^0.4.0"
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
 black = "^22.1.0"
+scriv = "^0.13.0"
+
+[tool.scriv]
+format = "md"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
