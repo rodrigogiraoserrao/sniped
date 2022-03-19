@@ -1,10 +1,19 @@
 
+# 0.2.1 — 2022-03-19
+
+### Changed
+
+- Unified code that makes API calls.
+
+- Add default values to:
+  - OUT argument (saves to `"out.png"` by default);
+  - LANGUAGE argument for carbon (is `"auto"` by default);
+
 # 0.2.0 — 2022-03-18
 
 ### Added
 
 - Support for the [Snappify](https://snappify.io) API (note that Snappify's API is still under heavy development and might introduce breaking changes; use at your own risk).
-
 
 # 0.1.0 – 2022-03-18
 
