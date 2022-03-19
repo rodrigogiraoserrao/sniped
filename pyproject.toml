@@ -15,7 +15,7 @@ typer = {extras = ["all"], version = "^0.4.0"}
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
 black = "^22.1.0"
-scriv = "^0.13.0"
+scriv = { git = "https://github.com/nedbat/scriv.git", branch = "main", rev = "4901a26a" }
 
 [tool.scriv]
 format = "md"

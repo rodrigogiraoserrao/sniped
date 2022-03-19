@@ -200,6 +200,7 @@ description = "Scriv changelog management tool"
 category = "dev"
 optional = false
 python-versions = "*"
+develop = false
 
 [package.dependencies]
 attrs = "*"
@@ -209,6 +210,12 @@ jinja2 = "*"
 
 [package.extras]
 toml = ["tomli"]
+
+[package.source]
+type = "git"
+url = "https://github.com/nedbat/scriv.git"
+reference = "main"
+resolved_reference = "4901a26a98d4fbe3a5581fcc8b10082e47ac3149"
 
 [[package]]
 name = "shellingham"
@@ -264,7 +271,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "7ead309eca2f169fb7e8399bc6d566518a4e997d59439b08ceaed0a2e1ae492f"
+content-hash = "b20e3d66084d7e12b101b129721d3b873bb422c0fb716866f1d675c3bff4806e"
 
 [metadata.files]
 atomicwrites = [
@@ -394,10 +401,7 @@ pytest = [
     {file = "pytest-5.4.3-py3-none-any.whl", hash = "sha256:5c0db86b698e8f170ba4582a492248919255fcd4c79b1ee64ace34301fb589a1"},
     {file = "pytest-5.4.3.tar.gz", hash = "sha256:7979331bfcba207414f5e1263b5a0f8f521d0f457318836a7355531ed1a4c7d8"},
 ]
-scriv = [
-    {file = "scriv-0.13.0-py2.py3-none-any.whl", hash = "sha256:06b65c76ba8d5f23f3eb7e914cafe2dbed7687371eadb9151b3b5c4020c33303"},
-    {file = "scriv-0.13.0.tar.gz", hash = "sha256:a95cc31ce0036320099fe99bcd7560374951dab313a7a5308bb9c4db5eee5527"},
-]
+scriv = []
 shellingham = [
     {file = "shellingham-1.4.0-py2.py3-none-any.whl", hash = "sha256:536b67a0697f2e4af32ab176c00a50ac2899c5a05e0d8e2dadac8e58888283f9"},
     {file = "shellingham-1.4.0.tar.gz", hash = "sha256:4855c2458d6904829bd34c299f11fdeed7cfefbf8a2c522e4caea6cd76b3171e"},
