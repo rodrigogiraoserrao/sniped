@@ -35,26 +35,32 @@ def load_config(config_file_path: str | pathlib.Path) -> dict:
         return json.load(f)
 
 
-@app.command()
-def carbon(code: str, language: str, out: str):
-    req = Request(CARBON_ENDPOINT)
-    req.add_header("Content-Type", "application/json")
+def make_image_from_request(
+    code: str, language: str, out: str, request: Request, config: dict
+):
 
-    possible_code_file = pathlib.Path(code)
-    if possible_code_file.exists() and possible_code_file.is_file():
-        with open(possible_code_file, "r") as f:
-            code = f.read()
-    elif code == "-":
-        code = read_code_from_stdin()
+    request.add_header("Content-Type", "application/json")
 
-    config = CARBON
+    code = read_code_from_stdin() if code == "-" else try_reading_from_file(code)
     config["code"] = code
     config["language"] = language
 
-    with urlopen(req, data=json.dumps(config).encode()) as response:
+    with urlopen(request, data=json.dumps(config).encode()) as response:
         image = response.read()
+
     with open(out, "wb") as f:
         f.write(image)
+
+
+@app.command()
+def carbon(code: str, language: str, out: str):
+    make_image_from_request(
+        code,
+        language,
+        out,
+        Request(CARBON_ENDPOINT),
+        CARBON,
+    )
 
 
 @app.command()
@@ -62,25 +68,13 @@ def snappify(code: str, language: str, out: str, key: str):
     req = Request(SNAPPIFY_ENDPOINT)
     key = try_reading_from_file(key)
     req.add_header("Authorization", key)
-    req.add_header("Content-Type", "application/json")
-
-    possible_code_file = pathlib.Path(code)
-    if possible_code_file.exists() and possible_code_file.is_file():
-        with open(possible_code_file, "r") as f:
-            code = f.read()
-    elif code == "-":
-        code = read_code_from_stdin()
-
-    config = SNAPPIFY
-    config["code"] = code
-    config["language"] = language
-
-    print(config)
-    print(repr(key))
-    with urlopen(req, data=json.dumps(config).encode()) as response:
-        image = response.read()
-    with open(out, "wb") as f:
-        f.write(image)
+    make_image_from_request(
+        code,
+        language,
+        out,
+        Request(SNAPPIFY_ENDPOINT),
+        SNAPPIFY,
+    )
 
 
 if __name__ == "__main__":
