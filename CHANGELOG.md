@@ -1,4 +1,24 @@
 
+<a name='changelog-1.0.0'></a>
+# 1.0.0 — 2022-03-19
+
+## Removed
+
+- Command `snappify`.
+- Command `carbon`.
+
+## Added
+
+- Added the command `create` to create snippets, instead of having one command per service.
+
+- Command `create` to create images out of code snippets.
+
+## Changed
+
+- Pin `scriv` to a more recent revision so that Markdown fragments are handled better.
+
+- Default behaviour is to output to stdout.
+
 # 0.2.1 — 2022-03-19
 
 ### Changed
