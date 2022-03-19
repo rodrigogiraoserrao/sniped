@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import enum
 import json
 import pathlib
 from urllib.request import Request, urlopen
@@ -10,6 +11,12 @@ import typer
 from .configs import CARBON, SNAPPIFY
 
 app = typer.Typer()
+
+
+class Service(enum.Enum):
+    CARBON = "carbon"
+    SNAPPIFY = "snappify"
+
 
 CARBON_ENDPOINT = "https://carbonara-42.herokuapp.com/api/cook"
 SNAPPIFY_ENDPOINT = "https://api.snappify.io/snap/simple"
@@ -50,6 +57,32 @@ def make_image_from_request(
 
     with open(out, "wb") as f:
         f.write(image)
+
+
+@app.command(options_metavar="[options]")
+def create(
+    service: Service = typer.Argument(..., case_sensitive=False),
+    code: str = typer.Argument(
+        ...,
+        metavar="code",
+        help=(
+            "Code to include in the image or path to code file."
+            + " Use '-' to read from stdin."
+        ),
+    ),
+    language: str = typer.Option(
+        "auto",
+        metavar="lang",
+        help="Language for syntax highlighting; 'auto' only works for carbon.",
+    ),
+    key: str = typer.Option(
+        "api.key",
+        metavar="key_or_path",
+        help="(Path to file with) API key for Snappify.",
+    ),
+    out: str = typer.Option("out.png", metavar="path"),
+):
+    pass
 
 
 @app.command()
