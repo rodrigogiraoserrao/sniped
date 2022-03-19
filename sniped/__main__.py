@@ -63,7 +63,7 @@ def make_image_from_request(
         f.write(image)
 
 
-@app.command(options_metavar="[options]")
+@app.command()
 def create(
     service: Service = typer.Argument(..., case_sensitive=False),
     code: str = typer.Argument(
@@ -122,7 +122,7 @@ def create(
             f.write(image)
 
 
-@app.command(options_metavar="[options]")
+@app.command()
 def config(
     service: Service = typer.Argument(..., case_sensitive=False),
     show: bool = typer.Option(
