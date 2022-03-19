@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sniped"
-version = "0.2.1"
+version = "1.0.0"
 description = "Turn snippets of code into beautiful images."
 authors = ["Rodrigo Girão Serrão <5621605+RodrigoGiraoSerrao@users.noreply.github.com>"]
 readme = "README.md"
