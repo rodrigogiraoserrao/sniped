@@ -28,7 +28,7 @@ CARBON = {
 
 
 SNAPPIFY = {
-    "fileName": "test.js",
+    "fileName": "",
     "theme": "github-dark-dimmed",
     "background": "linear-gradient(354deg,  #FF75B5, #FFB86C)",
     "paddingLeft": 60,
