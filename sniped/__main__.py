@@ -44,11 +44,6 @@ def try_reading_from_file(possible_file_path: str) -> str:
     return possible_file_path
 
 
-def load_config(config_file_path: str | pathlib.Path) -> dict:
-    with open(config_file_path) as f:
-        return json.load(f)
-
-
 def make_image_from_request(
     code: str, language: str, out: str, request: Request, config: dict
 ):
