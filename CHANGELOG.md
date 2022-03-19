@@ -1,4 +1,20 @@
 
+<a name='changelog-1.1.0'></a>
+# 1.1.0 — 2022-03-19
+
+## Added
+
+- Command `config` to manage configurations:
+  - option `--show` prints default configuration to stdout;
+  - option `--pretty` to determine whether printing to stdout is pretty or plain;
+  - option `--write` to write the configuration to a file;
+
+- Dependency on `rich` for pretty output.
+
+## Changed
+
+- Default snappify config now has empty file name.
+
 <a name='changelog-1.0.0'></a>
 # 1.0.0 — 2022-03-19
 

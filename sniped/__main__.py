@@ -79,11 +79,10 @@ def create(
         metavar="LANG",
         help="Language for syntax highlighting; 'auto' only works for carbon.",
     ),
-    key: str = typer.Option(
-        "",
+    key: Optional[str] = typer.Option(
+        None,
         metavar="KEY_OR_PATH",
         help="(Path to file with) API key for Snappify.",
-        envvar="SNAPPIFY_API_KEY",
     ),
     out: Optional[pathlib.Path] = typer.Option(
         None,
