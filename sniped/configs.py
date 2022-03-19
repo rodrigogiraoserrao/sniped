@@ -1,4 +1,9 @@
-CARBON = {
+"""Utilities related to default service configurations."""
+
+from .services import Service
+
+
+_CARBON = {
     "paddingVertical": "56px",
     "paddingHorizontal": "56px",
     "backgroundImage": None,
@@ -27,7 +32,7 @@ CARBON = {
 }
 
 
-SNAPPIFY = {
+_SNAPPIFY = {
     "fileName": "",
     "theme": "github-dark-dimmed",
     "background": "linear-gradient(354deg,  #FF75B5, #FFB86C)",
@@ -42,4 +47,10 @@ SNAPPIFY = {
         "position": "bottom-center",
     },
     "aspectRatio": {"width": 16, "height": 9},
+}
+
+
+CONFIGS = {
+    Service.CARBON: _CARBON.copy(),
+    Service.SNAPPIFY: _SNAPPIFY.copy(),
 }

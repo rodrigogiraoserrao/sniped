@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import enum
-import functools
 import json
 import pathlib
 from urllib.request import Request, urlopen
@@ -11,24 +9,11 @@ from typing import Optional
 from rich.pretty import pprint
 import typer
 
-from .configs import CARBON, SNAPPIFY
+from .configs import CONFIGS
+from .services import ENDPOINTS, Service
+
 
 app = typer.Typer()
-
-
-class Service(enum.Enum):
-    CARBON = "carbon"
-    SNAPPIFY = "snappify"
-
-
-ENDPOINTS = {
-    Service.CARBON: "https://carbonara-42.herokuapp.com/api/cook",
-    Service.SNAPPIFY: "https://api.snappify.io/snap/simple",
-}
-CONFIGS = {
-    Service.CARBON: CARBON,
-    Service.SNAPPIFY: SNAPPIFY,
-}
 
 
 def read_code_from_stdin():
@@ -44,23 +29,6 @@ def try_reading_from_file(possible_file_path: str) -> str:
             return f.read()
 
     return possible_file_path
-
-
-def make_image_from_request(
-    code: str, language: str, out: str, request: Request, config: dict
-):
-
-    request.add_header("Content-Type", "application/json")
-
-    code = read_code_from_stdin() if code == "-" else try_reading_from_file(code)
-    config["code"] = code
-    config["language"] = language
-
-    with urlopen(request, data=json.dumps(config).encode()) as response:
-        image = response.read()
-
-    with open(out, "wb") as f:
-        f.write(image)
 
 
 @app.command()
