@@ -53,7 +53,11 @@ def make_image_from_request(
 
 
 @app.command()
-def carbon(code: str, language: str, out: str):
+def carbon(
+    code: str,
+    language: str = typer.Argument("auto"),
+    out: str = typer.Argument("out.png"),
+):
     make_image_from_request(
         code,
         language,
@@ -64,7 +68,7 @@ def carbon(code: str, language: str, out: str):
 
 
 @app.command()
-def snappify(code: str, language: str, out: str, key: str):
+def snappify(code: str, key: str, language: str, out: str = typer.Argument("out.png")):
     req = Request(SNAPPIFY_ENDPOINT)
     key = try_reading_from_file(key)
     req.add_header("Authorization", key)
