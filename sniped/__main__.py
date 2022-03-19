@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import enum
+import functools
 import json
 import pathlib
 from urllib.request import Request, urlopen
 import sys
 from typing import Optional
 
+from rich.pretty import pprint
 import typer
 
 from .configs import CARBON, SNAPPIFY
@@ -101,7 +103,7 @@ def create(
         if not key:
             typer.echo("Option '--key' required for the Snappify service.", err=True)
             raise typer.Abort()
-        key = try_reading_from_file(key)
+        key = try_reading_from_file(key).strip()
         request.add_header("Authorization", key)
 
     code = read_code_from_stdin() if code == "-" else try_reading_from_file(code)
@@ -118,6 +120,40 @@ def create(
     else:
         with open(out, "wb") as f:
             f.write(image)
+
+
+@app.command(options_metavar="[options]")
+def config(
+    service: Service = typer.Argument(..., case_sensitive=False),
+    show: bool = typer.Option(
+        False,
+        help="Print the configuration to stdout.",
+    ),
+    pretty: bool = typer.Option(
+        True,
+        help="Whether to use pretty printing or show plain output.",
+    ),
+    write: Optional[pathlib.Path] = typer.Option(
+        None,
+        metavar="WRITE_PATH",
+        help="File to write default config to.",
+        dir_okay=False,
+        writable=True,
+    ),
+):
+    """Manage the configuration for the services."""
+
+    config = CONFIGS[service]
+    dump = json.dumps(config, indent=4)
+
+    if show:
+        if pretty:
+            pprint(config)
+        else:
+            print(dump)
+
+    if write is not None:
+        write.write_text(dump)
 
 
 if __name__ == "__main__":
