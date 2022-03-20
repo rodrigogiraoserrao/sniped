@@ -536,7 +536,7 @@ for lang in _SNAPPIFY_LANGUAGES:
 
 # Build the string that defines the Language enum.
 language_enum_definition = "class Language(enum.Enum):\n" + "\n".join(
-    " " * 4 + f'{name} = "{value}"' for name, value in enum_data
+    " " * 4 + f'{name} = "{value}"' for name, value in sorted(enum_data)
 )
 
 # Build the string that defines the LANGUAGES dictionary.
@@ -548,8 +548,7 @@ languages_dict_definition = f"""LANGUAGES = {{
     Service.SNAPPIFY: [
 {nl.join(" " * 8 + f"Language.{name}," for name in sorted(snappify_names))}
     ],
-}}
-"""
+}}"""
 
 
 languages = f'''"""Utilities related to themes supported by each service."""
@@ -581,4 +580,4 @@ def language_to_service_value(service: Service, value: str):
 
 
 dest = pathlib.Path(__file__).parent / "languages.py"
-dest.write_text(languages + "\n")
+dest.write_text(languages)
