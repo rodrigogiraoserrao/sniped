@@ -11,6 +11,7 @@ import typer
 
 from .configs import CONFIGS
 from .services import ENDPOINTS, Service
+from .themes import THEMES, Theme
 
 
 app = typer.Typer()
@@ -59,6 +60,11 @@ def create(
         dir_okay=False,
         writable=True,
     ),
+    theme: Optional[Theme] = typer.Option(
+        None,
+        metavar="THEME",
+        help="Theme to use for syntax highlighting.",
+    ),
 ):
     """Create a beautiful image from a snippet of code."""
 
@@ -78,6 +84,11 @@ def create(
     config = CONFIGS[service]
     config["code"] = code
     config["language"] = language
+    if theme is not None:
+        if theme not in THEMES[service]:
+            typer.echo(f"'--theme {theme}' not available for {service}.", err=True)
+            raise typer.Abort()
+        config["theme"] = theme.value
 
     with urlopen(request, data=json.dumps(config).encode()) as response:
         image = response.read()
