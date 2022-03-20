@@ -10,6 +10,7 @@ from rich.pretty import pprint
 import typer
 
 from .configs import CONFIGS
+from .languages import LANGUAGES, Language, language_to_service_value
 from .services import ENDPOINTS, Service
 from .themes import THEMES, Theme
 
@@ -43,10 +44,11 @@ def create(
             + " Use '-' to read from stdin."
         ),
     ),
-    language: str = typer.Option(
+    language: Language = typer.Option(
         "auto",
         metavar="LANG",
         help="Language for syntax highlighting; 'auto' only works for carbon.",
+        case_sensitive=False,
     ),
     key: Optional[str] = typer.Option(
         None,
@@ -64,6 +66,7 @@ def create(
         None,
         metavar="THEME",
         help="Theme to use for syntax highlighting.",
+        case_sensitive=False,
     ),
 ):
     """Create a beautiful image from a snippet of code."""
@@ -83,10 +86,19 @@ def create(
 
     config = CONFIGS[service]
     config["code"] = code
-    config["language"] = language
+
+    if language not in LANGUAGES[service]:
+        typer.echo(
+            f"'--language {language.value}' not available for {service}.", err=True
+        )
+        raise typer.Abort()
+    config["language"] = language_to_service_value(service, language.value)
+
     if theme is not None:
         if theme not in THEMES[service]:
-            typer.echo(f"'--theme {theme}' not available for {service}.", err=True)
+            typer.echo(
+                f"'--theme {theme.value}' not available for {service}.", err=True
+            )
             raise typer.Abort()
         config["theme"] = theme.value
 
