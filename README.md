@@ -68,6 +68,7 @@ $ sniped create [options] SERVICE:[carbon|snappify] CODE_OR_PATH
 * `--language LANG`: Language for syntax highlighting; 'auto' only works for carbon.  [default: auto]
 * `--key KEY_OR_PATH`: (Path to file with) API key for Snappify.
 * `--out PATH`: Write to given file instead of stdout.
+* `--theme THEME`: Theme to use for syntax highlighting.
 * `--help`: Show this message and exit.
 
 

@@ -1,4 +1,19 @@
 
+<a name='changelog-1.2.0'></a>
+# 1.2.0 — 2022-03-20
+
+## Removed
+
+- Some options from the default config for `carbon` because they don't affect the output.
+
+## Added
+
+- Option `--theme` to command `create` to modify theme from CLI.
+
+- Helper file that parses Language service information and compiles the `languages.py` file.
+
+- Validation to the `--language` option.
+
 <a name='changelog-1.1.0'></a>
 # 1.1.0 — 2022-03-19
 
